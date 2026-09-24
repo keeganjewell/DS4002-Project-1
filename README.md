@@ -13,9 +13,9 @@ Team Members:
 
 ## Software and Platform
 ### Software
-- Python 3
-- Google Colab
-- GitHub
+- Python 3, used for data collection, preprocessing, exploratory analysis, and modeling
+- Google Colab, used to develop and execute the Python notebooks
+- GitHub, used to store and organize the final project repository
 
 ### Python Packages
 The following Python packages are used in this project:
