@@ -55,7 +55,13 @@ ARTISTS_PER_GENRE_TARGET = 20  # final target per genre
 CANDIDATE_PAGES = 5  # 5 x 100 = 500 raw recordings per tag (MusicBrainz caps offset+limit at 500)
 
 GENRE_TAGS = {
-    "Country": ["country"],
+    "Country": [
+        "country",
+        "country rock",
+        "contemporary country",
+        "alternative country",
+        "outlaw country"
+    ],
     "Pop": ["pop", "pop rock", "dance-pop", "electropop", "synthpop"],
     "Rock": ["rock", "classic rock", "alternative rock", "hard rock", "indie rock"],
     "Hip-Hop/Rap": ["hip hop", "rap", "hip-hop", "gangsta rap", "trap"],
