@@ -32,6 +32,7 @@ The data collection and analysis were developed primarily in Google Colab, which
 
 The repository is organized as follows:
 
+```text
 DS4002-Project-1/
 ├── DATA/
 │   ├── music_genre_dataset_raw.csv
@@ -50,4 +51,7 @@ DS4002-Project-1/
 │
 ├── LICENSE
 └── README.md
+```
+
+## Reproducing the Results
 ## Reproducing the Results****
