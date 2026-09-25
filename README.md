@@ -30,4 +30,24 @@ The following Python packages are used in this project:
 The data collection and analysis were developed primarily in Google Colab, which runs in a Linux-based environment. Project files are stored and organized through Google Drive during development, and the final project repository is hosted on GitHub.
 ## Map of Documentation
 
+The repository is organized as follows:
+
+DS4002-Project-1/
+├── DATA/
+│   ├── music_genre_dataset_raw.csv
+│   ├── music_genre_dataset_with_lyrics.csv
+│   └── music_genre_dataset_final.csv
+│
+├── OUTPUT/
+│   └── temp
+│
+├── SCRIPTS/
+│   ├── 01_MusicBrainz_pilot.ipynb
+│   ├── 02_Lyric_collection.ipynb
+│   ├── collect_dataset.py
+│   ├── resume_from_checkpoint.py
+│   └── scale_check.py
+│
+├── LICENSE
+└── README.md
 ## Reproducing the Results****
