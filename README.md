@@ -54,3 +54,14 @@ DS4002-Project-1/
 ```
 
 ## Reproducing the Results
+
+The repository contains both pilot code developed during the dataset-establishment stage and the final dataset collection pipeline. The final dataset can be reproduced using the following steps.
+
+1. Clone or download this GitHub repository.
+
+2. Ensure Python 3 is installed.
+
+3. Install the Python packages required for dataset collection:
+
+   ```bash
+   pip install pandas requests langdetect
