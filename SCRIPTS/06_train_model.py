@@ -100,7 +100,7 @@ def load_data():
 # Artist-grouped train/test split
 # --------------------------------------------------------------------------
 
-def artist_grouped_split(df, test_size=0.25, random_state=RANDOM_SEED):
+def artist_grouped_split(df, test_size=0.20, random_state=RANDOM_SEED):
     # GroupShuffleSplit keeps every song from a given artist on the same
     # side of the split, so the model is tested on artists it has never
     # seen lyrics from -- a much harder (and more honest) test than a
@@ -280,7 +280,7 @@ def top_words_per_genre(vectorizer, clf, top_n=15):
 # --------------------------------------------------------------------------
 # Deployment model: refit on ALL labeled data (train + test) using the
 # C chosen by GroupKFold CV, so the live website uses every labeled example
-# instead of holding 25% out. The held-out test split above is only for
+# instead of holding 20% out. The held-out test split above is only for
 # honest accuracy/F1 reporting, not for what actually gets served.
 # --------------------------------------------------------------------------
 
