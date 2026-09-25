@@ -1,12 +1,19 @@
 """
+PIPELINE STEP 3 of 6: feasibility probe (optional -- run before collecting).
+
 Scale-check script: probes how many eligible artists/songs each genre
 yields under the UPDATED thresholds (>=1000 ListenBrainz listeners,
 wider MusicBrainz candidate pool) before committing to the full
 400-song (100/genre, 20 artists x 5 songs) collection run.
 
-Not the final pipeline -- just answers "is 400 achievable?" and reports
-where each genre's attrition happens (MusicBrainz eligibility ->
-popularity cutoff -> lyrics found -> English-only).
+Not required to reproduce the final dataset -- 04_collect_dataset.py does
+that on its own. This script only answers "is 400 achievable?" ahead of
+time and reports where each genre's attrition happens (MusicBrainz
+eligibility -> popularity cutoff -> lyrics found -> English-only).
+
+Run with: python SCRIPTS/03_scale_check.py
+Requires: internet access (queries MusicBrainz + ListenBrainz APIs live).
+Output:   DATA/scale_check_summary*.csv, DATA/scale_check_*_artist_pool_wide.csv
 """
 
 import requests
@@ -125,6 +132,11 @@ def get_listenbrainz_popularity(artist_mbid, max_attempts=3):
 
 
 def probe_genre(search_tags, target_genre):
+    """Run the same MusicBrainz -> single-artist-credit -> ListenBrainz
+    popularity funnel that the real collection pipeline (04_collect_dataset.py)
+    uses, but just to COUNT how many eligible artists would result --
+    doesn't fetch lyrics or save a dataset. Used to decide, before the slow
+    full pipeline runs, whether a genre's tag(s) need broadening."""
     if isinstance(search_tags, str):
         search_tags = [search_tags]
 

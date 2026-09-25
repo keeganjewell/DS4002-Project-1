@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyrics Genre Classifier</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --border: #2a2e38;
+    --text: #e8e9ec;
+    --muted: #9aa0ab;
+    --accent: #6ea8fe;
+    --country: #d9a441;
+    --pop: #e05f8f;
+    --rock: #c0392b;
+    --hiphop: #4c9f70;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 32px 16px 64px;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  header {
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: 1.6rem;
+    margin: 0 0 6px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  form {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  textarea {
+    width: 100%;
+    min-height: 220px;
+    background: #10131a;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    resize: vertical;
+    font-family: inherit;
+  }
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+  .word-hint {
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  button {
+    background: var(--accent);
+    color: #0f1115;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover {
+    filter: brightness(1.08);
+  }
+  .result {
+    margin-top: 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .result-headline {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .result-headline .label {
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .genre-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .confidence {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 4px 0 18px;
+  }
+  .bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 48px;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+  }
+  .bar-track {
+    background: #10131a;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    height: 14px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 6px 0 0 6px;
+  }
+  .bar-pct {
+    text-align: right;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .warning {
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: #2a2411;
+    border: 1px solid #55471b;
+    border-radius: 8px;
+    color: #e6c877;
+    font-size: 0.85rem;
+  }
+  footer {
+    margin-top: 32px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  /* genre colors */
+  .g-country { color: var(--country); }
+  .g-pop { color: var(--pop); }
+  .g-rock { color: var(--rock); }
+  .g-hiphop { color: var(--hiphop); }
+  .bg-country { background: var(--country); }
+  .bg-pop { background: var(--pop); }
+  .bg-rock { background: var(--rock); }
+  .bg-hiphop { background: var(--hiphop); }
+  .badge-country { background: color-mix(in srgb, var(--country) 22%, transparent); border: 1px solid var(--country); }
+  .badge-pop { background: color-mix(in srgb, var(--pop) 22%, transparent); border: 1px solid var(--pop); }
+  .badge-rock { background: color-mix(in srgb, var(--rock) 22%, transparent); border: 1px solid var(--rock); }
+  .badge-hiphop { background: color-mix(in srgb, var(--hiphop) 22%, transparent); border: 1px solid var(--hiphop); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Lyrics Genre Classifier</h1>
+    <p class="subtitle">Paste song lyrics below and a TF-IDF + logistic regression model will predict the genre &mdash; Country, Pop, Rock, or Hip-Hop/Rap &mdash; trained on 400 songs from artists with MusicBrainz genre tags.</p>
+  </header>
+
+  <form method="POST">
+    <textarea name="lyrics" placeholder="Paste lyrics here...">{{ lyrics_input }}</textarea>
+    <div class="form-footer">
+      <span class="word-hint">Longer lyrics (15+ words) give more reliable predictions.</span>
+      <button type="submit">Classify genre</button>
+    </div>
+  </form>
+
+  {% if result %}
+  {% set genre_slug = {
+    "Country": "country",
+    "Pop": "pop",
+    "Rock": "rock",
+    "Hip-Hop/Rap": "hiphop"
+  } %}
+  <div class="result">
+    <div class="result-headline">
+      <span class="label">Predicted genre</span>
+    </div>
+    <span class="genre-badge badge-{{ genre_slug[result.predicted_genre] }} g-{{ genre_slug[result.predicted_genre] }}">{{ result.predicted_genre }}</span>
+    <p class="confidence">{{ result.confidence }}% confidence &middot; {{ result.word_count }} words analyzed</p>
+
+    <div class="bars">
+      {% for genre, pct in result.ranked %}
+      <div class="bar-row">
+        <span class="g-{{ genre_slug[genre] }}">{{ genre }}</span>
+        <div class="bar-track">
+          <div class="bar-fill bg-{{ genre_slug[genre] }}" style="width: {{ pct }}%;"></div>
+        </div>
+        <span class="bar-pct">{{ pct }}%</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if result.low_confidence_warning %}
+    <div class="warning">Short input ({{ result.word_count }} words) &mdash; predictions on very short snippets are less reliable.</div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <footer>
+    Model: multinomial logistic regression on TF-IDF features, tuned with artist-grouped 5-fold cross-validation. On a held-out set of unseen artists it scores 63% accuracy / 0.60 macro F1 &mdash; strong at separating Hip-Hop/Rap, weaker between Country/Pop/Rock, which share more everyday vocabulary.
+  </footer>
+</div>
+</body>
+</html>
