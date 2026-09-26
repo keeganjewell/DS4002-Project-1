@@ -200,9 +200,9 @@ exist (produced by `06_train_model.py`) before running the site.
 
 ## References
 
-[1] MetaBrainz Foundation, "MusicBrainz Database," MusicBrainz. [Online]. Available: https://musicbrainz.org/
+[1] MusicBrainz, “MusicBrainz API,” https://musicbrainz.org/doc/MusicBrainz_API (accessed Sep. 18, 2026).
 
-[2] MetaBrainz Foundation, "ListenBrainz," ListenBrainz. [Online]. Available: https://listenbrainz.org/
+[2] ListenBrainz, “Popularity,” ListenBrainz Documentation, https://listenbrainz.readthedocs.io/en/latest/users/api/popularity.html (accessed Sep. 18, 2026).
 
 [3] LRCLIB, "LRCLIB API." [Online]. Available: https://lrclib.net/
 
@@ -215,3 +215,9 @@ exist (produced by `06_train_model.py`) before running the site.
 [7] J. D. Hunter, "Matplotlib: A 2D Graphics Environment," *Computing in Science & Engineering*, vol. 9, no. 3, pp. 90-95, 2007.
 
 [8] Pallets Projects, "Flask," Pallets. [Online]. Available: https://flask.palletsprojects.com/
+
+[9] GeeksforGeeks, “Understanding TF-IDF (term frequency-inverse document frequency),” https://www.geeksforgeeks.org/machine-learning/understanding-tf-idf-term-frequency-inverse-document-frequency/ (accessed Sep. 18, 2026).
+
+[10] “About / data license,” MusicBrainz, https://musicbrainz.org/doc/About/Data_License (accessed Sep. 18, 2026).
+
+
