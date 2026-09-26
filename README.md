@@ -47,9 +47,14 @@ The repository is organized as follows:
 ```text
 DS4002-Project-1/
 ├── DATA/
+│   ├── README.md                          <- data summary, provenance, license,
+│   │                                          ethical statements, data dictionary,
+│   │                                          and explanatory plots
 │   ├── music_genre_dataset_raw.csv
 │   ├── music_genre_dataset_with_lyrics.csv
-│   └── music_genre_dataset_final.csv
+│   ├── music_genre_dataset_final.csv
+│   ├── genre_class_balance.png            <- explanatory plot 1
+│   └── lyric_length_by_genre.png          <- explanatory plot 2
 │
 ├── MODEL/
 │   ├── vectorizer.joblib
@@ -74,7 +79,7 @@ DS4002-Project-1/
 │   └── templates/
 │       └── index.html
 │
-├── LICENSE
+├── LICENSE.md
 └── README.md
 ```
 
@@ -130,6 +135,9 @@ The data-collection pipeline produces:
 - `DATA/music_genre_dataset_raw.csv` — candidate songs before lyric retrieval.
 - `DATA/music_genre_dataset_with_lyrics.csv` — candidate songs after lyric retrieval and before final filtering.
 - `DATA/music_genre_dataset_final.csv` — final balanced dataset used for modeling.
+
+See `DATA/README.md` for the full data summary, provenance, license, ethical
+considerations, data dictionary, and explanatory plots for these files.
 
 ### 3. Reproduce the Classification Analysis
 
@@ -189,3 +197,21 @@ python SITE/app.py
 
 Then open `http://localhost:5000`. The model files in `MODEL/` must already
 exist (produced by `06_train_model.py`) before running the site.
+
+## References
+
+[1] MetaBrainz Foundation, "MusicBrainz Database," MusicBrainz. [Online]. Available: https://musicbrainz.org/
+
+[2] MetaBrainz Foundation, "ListenBrainz," ListenBrainz. [Online]. Available: https://listenbrainz.org/
+
+[3] LRCLIB, "LRCLIB API." [Online]. Available: https://lrclib.net/
+
+[4] N. Shuyo, "langdetect: Language detection library for Python," PyPI. [Online]. Available: https://pypi.org/project/langdetect/
+
+[5] F. Pedregosa et al., "Scikit-learn: Machine Learning in Python," *Journal of Machine Learning Research*, vol. 12, pp. 2825-2830, 2011.
+
+[6] W. McKinney, "Data Structures for Statistical Computing in Python," in *Proc. 9th Python in Science Conf.*, 2010, pp. 56-61.
+
+[7] J. D. Hunter, "Matplotlib: A 2D Graphics Environment," *Computing in Science & Engineering*, vol. 9, no. 3, pp. 90-95, 2007.
+
+[8] Pallets Projects, "Flask," Pallets. [Online]. Available: https://flask.palletsprojects.com/
