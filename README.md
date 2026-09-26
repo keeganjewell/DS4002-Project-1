@@ -116,8 +116,8 @@ The pipeline:
 5. Samples 20 artists per genre and 5 songs per artist.
 
 `04_collect_dataset.py` on its own under-fills Country (its single
-`"country"` tag search yields only ~13-15 eligible artists). `05_backfill_country.py`
-must be run immediately afterward -- it widens the Country tag search and
+`"country"` tag search yields only ~13-15 eligible artists). This is why `05_backfill_country.py`
+was created to be run right after. This will widen the Country tag search and
 backfills the remaining artists needed to reach 20 artists / 100 songs for
 Country, so that all four genres end up balanced.
 
