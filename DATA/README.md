@@ -14,7 +14,9 @@ Country, Pop, Rock, and Hip-Hop/Rap (100 songs each). Each genre contains 20
 artists, with every artist contributing exactly 5 songs. Every row pairs a
 song's plain-text lyrics with a single project-assigned genre label, along
 with the MusicBrainz/LRCLIB identifiers needed to trace that row back to its
-source recording and lyric match.
+source recording and lyric match. 
+
+The dataset is balanced not only by genre but also by artist representation, with 20 artists represented in each genre and five songs sampled per artist. This prevents any individual artist from disproportionately representing a genre and supports the artist-disjoint evaluation strategy used during modeling. By separating artists between training and testing, evaluation is better determined to measure whether the classifier learns broader genre-related lyrical patterns rather than vocabulary associated with particular artists.
 
 Three CSV files are provided, representing successive stages of the
 collection pipeline:
@@ -145,7 +147,7 @@ balanced: 100 songs and 20 artists for each of the four genres. This
 balance is a design goal of the collection pipeline (`SCRIPTS/04_collect_dataset.py`
 and `SCRIPTS/05_backfill_country.py`), not an incidental property of the raw
 MusicBrainz/ListenBrainz pool, which is why it's worth confirming directly
-on the final CSV.
+on the final CSV. This balance ensures that no genre contributes more observations to model training solely because of class size. As a result, differences in classification performance are less likely to appear because one genre is represented by more songs than another.
 
 ![Genre class balance](genre_class_balance.png)
 
