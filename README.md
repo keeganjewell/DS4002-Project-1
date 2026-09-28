@@ -79,11 +79,6 @@ DS4002-Project-1/
 │   └── templates/
 │       └── index.html
 │
-├── api/
-│   └── index.py                           <- Vercel serverless entrypoint, re-exports SITE/app.py's Flask app
-│
-├── vercel.json                            <- Vercel deployment config
-├── requirements.txt                       <- pinned deploy dependencies (Flask, scikit-learn, joblib, numpy)
 ├── LICENSE.md
 └── README.md
 ```
@@ -202,28 +197,6 @@ python SITE/app.py
 
 Then open `http://localhost:5000`. The model files in `MODEL/` must already
 exist (produced by `06_train_model.py`) before running the site.
-
-### 6. Deploying the Website (Vercel)
-
-The site is also set up to deploy on [Vercel](https://vercel.com), which
-runs the same Flask app (`SITE/app.py`) as a Python serverless function
-via `api/index.py`. `vercel.json` routes all requests to that function and
-includes `MODEL/` and `SITE/templates/` in the deployed bundle.
-
-To deploy from this repo:
-
-1. Install the Vercel CLI (`npm i -g vercel`) or use the
-   [Vercel dashboard](https://vercel.com/new) and connect this GitHub repo.
-2. From the repo root, run `vercel login` then `vercel` (or, from the
-   dashboard, click "Import Project" and select this repo). Vercel
-   auto-detects the Python function in `api/index.py` and installs
-   `requirements.txt`.
-3. Once deployed, every push to the connected branch redeploys
-   automatically.
-
-No changes to `SITE/app.py` are needed to run locally vs. on Vercel — both
-entrypoints load the same `MODEL/*.joblib` files and render the same
-template.
 
 ## References
 
