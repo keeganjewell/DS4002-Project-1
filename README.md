@@ -20,6 +20,7 @@ one of four genres (Country, Pop, Rock, Hip-Hop/Rap) from a song's lyrics.
 - Python 3, used for data collection, preprocessing, exploratory analysis, and modeling
 - Flask, used to serve the trained model through a simple web interface
 - GitHub, used to store and organize the final project repository
+- Windows 11 and macOS as main operating systems
 
 ### Python Packages
 The following Python packages are used in this project:
