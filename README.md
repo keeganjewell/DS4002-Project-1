@@ -17,22 +17,22 @@ one of four genres (Country, Pop, Rock, Hip-Hop/Rap) from a song's lyrics.
 
 ## Software and Platform
 ### Software
-- Python 3, used for data collection, preprocessing, exploratory analysis, and modeling
-- Flask, used to serve the trained model through a simple web interface
+- Python 3.13.7, used for data collection, preprocessing, exploratory analysis, and modeling
+- Flask 3.1.3, used to serve the trained model through a simple web interface
 - GitHub, used to store and organize the final project repository
 - Windows 11 and macOS as main operating systems
 
 ### Python Packages
 The following Python packages are used in this project:
 
-- pandas
-- numpy
-- requests
-- scikit-learn
-- matplotlib
-- langdetect
-- joblib
-- flask
+- pandas 2.3.2
+- numpy 2.3.3
+- requests 2.32.5
+- scikit-learn 1.7.2
+- matplotlib 3.10.7
+- langdetect 1.0.9
+- joblib 1.5.2
+- flask 3.1.3
 
 ### Platform
 Data collection and modeling scripts were developed and run locally with
@@ -91,10 +91,12 @@ and the script used to perform the genre-classification analysis.
 
 ### 1. Install Required Software
 
-Python 3 is required. Install the packages used in the project with:
+Python 3.13.7 is required. Install the exact package versions used in the
+project with:
 
 ```bash
-pip install pandas numpy requests scikit-learn matplotlib langdetect joblib flask
+pip install pandas==2.3.2 numpy==2.3.3 requests==2.32.5 scikit-learn==1.7.2 \
+    matplotlib==3.10.7 langdetect==1.0.9 joblib==1.5.2 flask==3.1.3
 ```
 
 ### 2. Reproduce the Dataset
